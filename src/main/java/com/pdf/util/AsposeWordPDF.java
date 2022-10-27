@@ -26,10 +26,6 @@ public class AsposeWordPDF {
     public static void word2pdf(String docFile,String outPdfFile){
         log.info("输入合同DOC文件路径：【{}】", docFile);
         log.info("输出合同PDF文件路径: 【{}】", outPdfFile);
-        // 验证License
-//        if (!getLicense()) {
-//            return;
-//        }
         FileOutputStream os = null;
         try {
             File file = new File(outPdfFile);
@@ -68,10 +64,7 @@ public class AsposeWordPDF {
 
 
     public static void html2word(String htmlFile,String outDocFile){
-        // 验证License
-        if (!getLicense()) {
-            return;
-        }
+
         FileOutputStream os = null;
         try {
             os = new FileOutputStream(outDocFile);
@@ -88,28 +81,5 @@ public class AsposeWordPDF {
         }
     }
 
-    /**
-     * 获取license
-     * @return
-     */
-    public static boolean getLicense() {
-        boolean result = false;
-        InputStream is = null;
-        try {
-            is = AsposeWordPDF.class.getClassLoader().getResourceAsStream("license.xml");
-            License aposeLic = new License();
-            aposeLic.setLicense(is);
-            result = true;
-        } catch (Exception e) {
-            log.error("asp许可证认证失败",e);
-        } finally {
-            if(is!=null){
-                try {
-                    is.close();
-                } catch (IOException e) {}
-            }
-        }
-        return result;
-    }
 
 }
