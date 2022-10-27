@@ -26,7 +26,7 @@ public class PdfServiceImpl implements  PdfService{
     @Override
     public byte[] generatePdf() {
         //缓存存放
-        String  fsLocalPath="C:\\tmp";
+        String  fsLocalPath="D:\\tmp";
         ClassPathResource resource = new ClassPathResource("wordTemplate/studentTemplate.docx");
         String docTemplateFile =  resource.getAbsolutePath();
 
@@ -39,7 +39,9 @@ public class PdfServiceImpl implements  PdfService{
             tmpPdfOutFile = File.createTempFile("SxzdPreapprovalReport", ".pdf", new File(fsLocalPath));
 
             LoopRowTableRenderPolicy loopRowPolicy = new LoopRowTableRenderPolicy();
-
+            /**
+             * 注意如果是集合元素一定要放入config
+             */
             Configure config = Configure.builder()
                     .bind("subjectList", loopRowPolicy)
                     .useSpringEL(false)
